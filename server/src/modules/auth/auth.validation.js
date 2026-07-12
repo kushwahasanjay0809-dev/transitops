@@ -31,4 +31,27 @@ const changePasswordSchema = z.object({
   path: ['confirmPassword'],
 });
 
-module.exports = { loginSchema, changePasswordSchema };
+const registerSchema = z.object({
+  fullName: z
+    .string({ required_error: 'Full name is required' })
+    .min(1, 'Full name is required')
+    .max(200, 'Full name must be at most 200 characters')
+    .trim(),
+  email: z
+    .string({ required_error: 'Email is required' })
+    .email('Invalid email format')
+    .max(255, 'Email must be at most 255 characters')
+    .transform((val) => val.toLowerCase().trim()),
+  password: z
+    .string({ required_error: 'Password is required' })
+    .min(8, 'Password must be at least 8 characters')
+    .max(100, 'Password must be at most 100 characters'),
+  confirmPassword: z
+    .string({ required_error: 'Confirm password is required' })
+    .min(1, 'Confirm password is required'),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: 'Passwords do not match',
+  path: ['confirmPassword'],
+});
+
+module.exports = { loginSchema, registerSchema, changePasswordSchema };

@@ -92,6 +92,53 @@ class AuthService {
   }
 
   /**
+   * Register a new user with the MANAGER role.
+   */
+  async register(fullName, email, password) {
+    // Check if email already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      throw AppError.conflict('Email is already registered');
+    }
+
+    // Find MANAGER role
+    const managerRole = await prisma.role.findUnique({
+      where: { name: 'MANAGER' },
+    });
+
+    if (!managerRole) {
+      throw AppError.internal('Manager role not found in database');
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, env.bcryptSaltRounds);
+
+    // Split name into firstName and lastName
+    const nameParts = fullName.trim().split(/\s+/);
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(' ') || '';
+
+    // Create user
+    const newUser = await prisma.user.create({
+      data: {
+        firstName,
+        lastName,
+        email,
+        password: hashedPassword,
+        roleId: managerRole.id,
+        isActive: true,
+      },
+      include: { role: true },
+    });
+
+    // Return sanitized user
+    return this.sanitizeUser(newUser);
+  }
+
+  /**
    * Generate a JWT token for the given user.
    */
   generateToken(user) {

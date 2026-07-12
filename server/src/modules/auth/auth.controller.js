@@ -21,6 +21,24 @@ class AuthController {
   }
 
   /**
+   * POST /api/auth/register
+   * Register a new user.
+   */
+  async register(req, res, next) {
+    try {
+      const { fullName, email, password } = req.body;
+      const user = await authService.register(fullName, email, password);
+
+      ApiResponse.created(res, {
+        message: 'Account created successfully',
+        data: user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
    * GET /api/auth/profile
    * Get the current authenticated user's profile.
    */

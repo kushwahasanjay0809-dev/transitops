@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Truck, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -175,7 +175,23 @@ export default function LoginPage() {
                 'Sign In'
               )}
             </button>
+
+            <button
+              type="button"
+              className="btn btn-secondary btn-lg"
+              onClick={() => navigate('/signup')}
+              style={{ width: '100%', marginTop: '0.75rem' }}
+            >
+              Create Account
+            </button>
           </form>
+
+          <div style={{ textAlign: 'center', marginTop: '1.25rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+            Don't have an account?{' '}
+            <Link to="/signup" style={{ fontWeight: 600, color: 'var(--color-primary-light)' }}>
+              Sign Up
+            </Link>
+          </div>
 
           {/* Demo credentials */}
           <div
