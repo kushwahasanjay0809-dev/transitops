@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-coimport axios from 'axios';
-
 const api = axios.create({
   baseURL: '/api',
   headers: {
