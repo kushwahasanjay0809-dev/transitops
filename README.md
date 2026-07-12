@@ -4,6 +4,11 @@ A comprehensive transport and fleet management platform built with React, Node.j
 
 ---
 
+## 🔗 Live Demo
+Check out the live deployment on Vercel: [https://transitops-orpin.vercel.app/](https://transitops-orpin.vercel.app/)
+
+---
+
 ## 📋 Features
 
 ### Core Modules

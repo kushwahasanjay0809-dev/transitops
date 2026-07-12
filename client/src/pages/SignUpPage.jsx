@@ -356,6 +356,11 @@ export default function SignUpPage() {
               Sign In
             </Link>
           </div>
+
+          {/* Live Demo link */}
+          <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.8125rem', color: 'var(--text-muted)' }}>
+            Live Demo: <a href="https://transitops-orpin.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary-light)', textDecoration: 'underline' }}>transitops-orpin.vercel.app</a>
+          </div>
         </div>
       </div>
     </div>
