@@ -1,0 +1,39 @@
+{
+  "name": "transitops-server",
+  "version": "1.0.0",
+  "description": "TransitOps — Transport Operations Platform Backend",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "db:generate": "npx prisma generate",
+    "db:migrate": "npx prisma migrate dev",
+    "db:migrate:prod": "npx prisma migrate deploy",
+    "db:push": "npx prisma db push",
+    "db:seed": "node prisma/seed.js",
+    "db:studio": "npx prisma studio",
+    "db:reset": "npx prisma migrate reset"
+  },
+  "keywords": ["transport", "fleet", "logistics", "operations"],
+  "author": "TransitOps Team",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "prisma": "^6.9.0"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+}
