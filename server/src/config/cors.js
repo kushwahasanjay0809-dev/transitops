@@ -9,6 +9,9 @@ const corsOptions = {
 
     const allowedOrigins = env.corsOrigin.split(',').map((o) => o.trim());
 
+    console.log('CORS Origin:', origin);
+console.log('Allowed Origins:', allowedOrigins);
+
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
